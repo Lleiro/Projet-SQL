@@ -1,0 +1,82 @@
+
+Réponses TP
+La saga du Seigneur des Anneaux
+
+
+
+
+
+
+
+
+
+
+Préambule - Analyse des données
+
+
+1) Commençons  par  comprendre  ce  schéma.  Répondez  aux  questions  suivantes  en  vous aidant des dépendances fonctionnelles.
+
+A) Un personnage (nomPers) peut-il avoir plusieurs années de naissance?
+
+Non, car DF1 (nomPers-> anNaiss) permet d’obtenir l’année de naissance avec le nomPers seul, on ne peut donc avoir qu’une année de naissance par nom de personnage.
+
+
+B) Un personnage (nomPers) peut-il avoir plusieurs traits de caractère?
+
+Oui, car DF6 (nomPers, traitCar, numChap, numLivre→coefCar) nous dit que le trait de caractère est propre à un nom de personnage pour un chapitre et un livre donné.
+
+
+C) Plusieurs personnages (nomPers) peuvent-ils être imberbes (imberbe='oui')?
+
+Oui, car la DF3 (nomType-> imberbe) nous dit que imberbe dépend de nomtype, or le nom du type dépend du nom du personnage selon DF9 (nomPers-> nomType).
+
+
+D) Un personnage peut-il apparaître dans plusieurs chapitres d’un livre avec le même trait de caractère?
+
+Oui, car le trait de caractère ne dépend pas que du livre mais aussi du chapitre, il peut donc en avoir un différent dans chaque chapitre d’un livre et donc le même selon DF6 (nomPers, traitCar, numChap, numLivre→coefCar)
+
+
+
+
+Partie 1 – Normalisation
+
+1) Donnez  des  exemples des différents types de problèmes (anomalies de mise à jour, d’insertion   et  de  suppression) qui peuvent apparaître avec l’utilisation de la relation Personnages.
+
+
+
+2) Donnez les dépendances fonctionnelles non élémentaires en les justifiant.
+
+Les dépendances fonctionnelles non élémentaires sont :
+
+- DF4 (nomPers, numChap-> anNaiss) non élémentaire car on a déjà DF1 (nomPers-> anNaiss)
+- DF5 (nomPers, numChap-> tailleMoy) non élémentaire car on a déjà DF2 (nomType-> tailleMoy) or le nomType est donné par nomPers selon DF9 (nomPers-> nomType)
+- DF8 (nomType, tailleMoy-> imberbe) non élémentaire car on obtient tailleMoy avec nomType selon DF2 (nomType-> tailleMoy)
+
+
+3) En  plus  des  dépendances  fonctionnelles  non  élémentaires  trouvées  à  la  question précédente, y a t-il des dépendances fonctionnelles redondantes ? Si  oui, lesquelles ? Justifiez.
+
+DF7 (nomPers→imberbe) est redondant car on peut déjà déterminé imberbe avec DF3 (nomType-> imberbe) or on obtient nomType avec nomPers avec DF9 (nomPers-> nomType).
+
+4) Donnez le graphe des dépendances fonctionnelles de F’, la couverture minimale de F.
+
+
+
+5) Justifiez que la clé de la relation Personnages est (nomPers, numChap, numLivre, traitCar).
+
+Le groupe (nomPers, numChap, numLivre, traitCar) est le seul permettant d’obtenir coeffCar, et tout les autres attributs manquant s’obtiennent avec un des attributs du groupe.
+
+6) Donnez la forme normale de la relation Personnages. Justifiez.
+
+7) Proposez  une  décomposition de  la  relation Personnages en plusieurs relations.  Cette décomposition devra être en troisième forme normale, devra préserver l'information et les   dépendances fonctionnelles. Soulignez la clé de chaque relation de cette décomposition.
+
+Partie 2 – Optimisation
+
+2) Quels index proposez-vous pour diminuer le coût de ces requêtes avec la table Personnages ? Avec les relations normalisées  ?
+
+Conclusion (parties 1 et 2)
+
+Quelles  conclusions  pouvez-vous  tirer  à  propos  de  l’utilisation de la relation Personnages ou des relations normalisées ?
+
+Partie 3 – Transactions
+
+5) Quelles  solutions  proposez-vous  pour  résoudre  les  problèmes  rencontrés  dans  lesquestions 1, 2, 3 et 4? Illustrez vos propositions.
