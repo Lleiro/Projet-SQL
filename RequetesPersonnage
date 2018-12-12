@@ -1,0 +1,28 @@
+R1 :
+bases3d24=> explain analyze select nomPers, anNaiss, traitCar, coefCar from Personnages;
+                                                 QUERY PLAN
+-------------------------------------------------------------------------------------------------------------
+ Seq Scan on personnages  (cost=0.00..40.91 rows=1691 width=27) (actual time=0.010..0.970 rows=1691 loops=1)
+ Planning time: 0.043 ms
+ Execution time: 1.711 ms
+(3 rows)
+
+
+
+
+R2:
+bases3d24=> explain analyze select distinct(numChap), numLivre, titre from Personnages where nomPers = 'Frodon';
+                                                              QUERY PLAN
+--------------------------------------------------------------------------------------------------------------------------------------
+ Unique  (cost=13.18..13.21 rows=3 width=33) (actual time=0.069..0.085 rows=10 loops=1)
+   ->  Sort  (cost=13.18..13.19 rows=3 width=33) (actual time=0.068..0.075 rows=12 loops=1)
+         Sort Key: numchap, numlivre, titre
+         Sort Method: quicksort  Memory: 25kB
+         ->  Bitmap Heap Scan on personnages  (cost=4.30..13.16 rows=3 width=33) (actual time=0.026..0.035 rows=12 loops=1)
+               Recheck Cond: (nompers = 'Frodon'::text)
+               Heap Blocks: exact=1
+               ->  Bitmap Index Scan on personnages_pkey  (cost=0.00..4.30 rows=3 width=0) (actual time=0.019..0.020 rows=12 loops=1)
+                     Index Cond: (nompers = 'Frodon'::text)
+ Planning time: 0.097 ms
+ Execution time: 0.122 ms
+(11 rows)
