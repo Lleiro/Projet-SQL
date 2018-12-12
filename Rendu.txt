@@ -5,12 +5,6 @@ La saga du Seigneur des Anneaux
 
 
 
-
-
-
-
-
-
 Préambule - Analyse des données
 
 
@@ -44,6 +38,7 @@ Partie 1 – Normalisation
 
 
 
+
 2) Donnez les dépendances fonctionnelles non élémentaires en les justifiant.
 
 Les dépendances fonctionnelles non élémentaires sont :
@@ -67,9 +62,24 @@ Le groupe (nomPers, numChap, numLivre, traitCar) est le seul permettant d’obte
 
 6) Donnez la forme normale de la relation Personnages. Justifiez.
 
+
+
 7) Proposez  une  décomposition de  la  relation Personnages en plusieurs relations.  Cette décomposition devra être en troisième forme normale, devra préserver l'information et les   dépendances fonctionnelles. Soulignez la clé de chaque relation de cette décomposition.
 
+    R1 (_NomPers, anNaiss, NomType)
+    R2 (_NomType, TailleMoy, imberbe)
+    R3 ()
+
+
+
+
 Partie 2 – Optimisation
+
+
+
+
+
+
 
 2) Quels index proposez-vous pour diminuer le coût de ces requêtes avec la table Personnages ? Avec les relations normalisées  ?
 
