@@ -26,3 +26,17 @@ bases3d24=> explain analyze select distinct(numChap), numLivre, titre from Perso
  Planning time: 0.097 ms
  Execution time: 0.122 ms
 (11 rows)
+
+
+R3:
+bases3d24=> explain analyze select count(distinct(nomPers)) from personnages ;
+                                                    QUERY PLAN
+------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=45.14..45.15 rows=1 width=8) (actual time=2.325..2.327 rows=1 loops=1)
+   ->  Seq Scan on personnages  (cost=0.00..40.91 rows=1691 width=8) (actual time=0.011..0.900 rows=1691 loops=1)
+ Planning time: 0.058 ms
+ Execution time: 2.373 ms
+(4 rows)
+
+
+R4:
