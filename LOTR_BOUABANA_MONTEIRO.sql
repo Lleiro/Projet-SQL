@@ -42,6 +42,10 @@ insert into coeffCar (nomPers, numChap, numLivre, traitCar, coefCar) select nomP
 
 insert into titre (numChap, numLivre, titre) select numChap, numLivre, titre from Personnages;
 
+-- update intégrités de la base
+update personnages set titre="Une réception depuis longtemps attendue" where numLivre="1" and numChap=12;
+update personnages set titre="Fuite vers le gué" where numLivre="1" and numChap=12;
+update personnages set titre=concat(titre, "livre:", numLivre, "chapitre:", numChap) where titre="Le pont du destin de Gondor";
 
 
 
