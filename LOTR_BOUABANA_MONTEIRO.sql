@@ -214,90 +214,27 @@ commit;
 --========================
 -- Question 4 :
 --========================
+-- user1
+begin;
+-- user2
+begin;
+-- user1
+update personnageMieux set numChap = 3 where nomPers = 'Bilbon';
+-- user2
+update type set nomType = "renard" where nomType = 'humain';
+-- user1
+update type set nomType = "renard" where nomType = 'humain';
+-- user2
+update personnageMieux set numChap = 3 where nomPers = 'Bilbon';
+-- user1
+commit;
+-- user2
+commit;
 
 --========================
 -- Question 5 :
 --========================
 
-----=============================================================================
-----=============================================================================
-----=============================================================================
-----=============================================================================
-----=============================================================================
-----=============================================================================
-----=============================================================================
-/***********
-* Partie 3 *
-************/
-
-/**** 1 ****/
-/* Lecure impropre*/
--- user1
-begin;
-select * from R1;
-insert into R1 values('Jean-Michel', 2, '1', 'courageux');
--- user2
-select * from R1;
--- user1
-rollback;
--- user2
-select * from R1;
-
-
-/**** 2 ****/
-/* Perte de mise à jour */
--- user1
-begin;
-select numChap from R1;
--- user2
-begin;
-select numChap from R1;
--- user1
-update R1 set numChap = numChap+1 where nomPers = 'Jean-Michel';
-commit;
--- user2
-update R1 set numChap = numChap+5 where nomPers = 'Jean-Michel';
-commit;
--- user1
-select numChap from R1;
--- user2
-select numChap from R1;
-
-
-/**** 3 ****/
-/* Lecure non reproductible*/
--- user1
-begin;
--- user2
-select * from R1;
--- user1
-insert into R1 values('Jean-Michel', 2, '1', 'courageux');
--- user2
-select * from R1;
--- user1
-commit;
--- user2
-select * from R1;
-
-
-/**** 4 ****/
-/* Interblocage */
--- user1
-begin;
--- user2
-begin;
--- user1
-update R1 set numChap = numChap+5 where nomPers = 'Jean-Michel';
--- user2
-update CARACTERISTIQUE set nomType = "Hobbbbit" where nomType = 'hobbit';
--- user1
-update CARACTERISTIQUE set nomType = "Manchot" where nomType = 'hobbit';
--- user2
-update R1 set numChap = numChap+8 where nomPers = 'Jean-Michel';
--- user1
-commit;
--- user2
-commit;
 
 
 -- fin de fichier
