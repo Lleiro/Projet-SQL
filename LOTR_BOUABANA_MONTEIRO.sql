@@ -149,10 +149,31 @@ explain analyze delete from coeffCar where numChap = 13 and numLivre = '3';
 
 -- PARTIE 3 : TRANSACTIONS
 
+--========================
 -- Question 1 :
-
+--========================
 -- exemple de perte de lecture impropre
 -- user1
+begin;
+select numChap from personnageMieux;
+-- user2
+begin;
+select numChap from personnageMieux;
+-- user1
+update personnageMieux set numChap = 5 where nomPers = 'Jack Daniel';
+-- user2
+select numChap from personnageMieux;
+-- user1
+rollback;
+select numChap from personnageMieux;
+-- user2
+select numChap from personnageMieux;
+commit;
+
+--========================
+-- Question 2 :
+--========================
+--user
 begin;
 select numChap from personnageMieux;
 -- user2
@@ -169,15 +190,42 @@ select numChap from personnageMieux;
 -- user2
 select numChap from personnageMieux;
 
--- Question 2 :
+--========================
+----- Question 3 :
+--========================
+-- user1
+begin;
+select numChap from personnageMieux;
+-- user2
+begin;
+select numChap from personnageMieux;
+-- user1
+update personnageMieux set numChap = 5 where nomPers = 'Jack Daniel';
+-- user2
+select numChap from personnageMieux;
 
--- Question 3 :
+-- user1
+commit
+select numChap from personnageMieux;
+-- user2
+select numChap from personnageMieux;
+commit;
 
+--========================
 -- Question 4 :
+--========================
 
+--========================
 -- Question 5 :
+--========================
 
-
+----=============================================================================
+----=============================================================================
+----=============================================================================
+----=============================================================================
+----=============================================================================
+----=============================================================================
+----=============================================================================
 /***********
 * Partie 3 *
 ************/
